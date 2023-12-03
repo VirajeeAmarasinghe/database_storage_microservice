@@ -14,38 +14,23 @@ class MetricsStorageController extends Controller
         $this->databaseMetricsService = $databaseMetricsService;
     }
 
-    public function storeCommits(Request $request)
+    public function storeCommitFrequency($username, $repoName)
     {
-        return $this->databaseMetricsService->storeCommits($request->all());
+        return $this->databaseMetricsService->storeCommitFrequency($username, $repoName);
     }
 
-    public function storePullRequests(Request $request)
+    public function storeCodeReviewInvolvement($username, $repoName)
     {
-        return $this->databaseMetricsService->storePullRequests($request->all());
+        return $this->databaseMetricsService->storeCodeReviewInvolvement($username, $repoName);
     }
 
-    public function storeIssuesResolved(Request $request)
+    public function storeIssueResolutionTime($username, $repoName)
     {
-        return $this->databaseMetricsService->storeIssuesResolved($request->all());
+        return $this->databaseMetricsService->storeIssueResolutionTime($username, $repoName);
     }
 
-    public function storeCommitFrequency(Request $request)
+    public function storeCodeChurn($username, $repoName)
     {
-        return $this->databaseMetricsService->storeCommitFrequency();
-    }
-
-    public function storeCodeReviewInvolvement(Request $request)
-    {
-        return $this->databaseMetricsService->storeCodeReviewInvolvement($request->all());
-    }
-
-    public function storeIssueResolutionTime(Request $request)
-    {
-        return $this->databaseMetricsService->storeIssueResolutionTime($request->all());
-    }
-
-    public function storeCodeChurn(Request $request)
-    {
-        return $this->databaseMetricsService->storeCodeChurn($request->all());
+        return $this->databaseMetricsService->storeCodeChurn($username, $repoName);
     }
 }

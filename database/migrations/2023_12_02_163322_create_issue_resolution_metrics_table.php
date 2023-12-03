@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('commit_frequency_metrics', function (Blueprint $table) {
+        Schema::create('issue_resolution_metrics', function (Blueprint $table) {
             $table->id();
             $table->string('username');
             $table->string('repo_name');
-            $table->integer('commit_frequency');            
+            $table->double('average');            
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commit_frequency_metrics');
+        Schema::dropIfExists('issue_resolution_metrics');
     }
 };
