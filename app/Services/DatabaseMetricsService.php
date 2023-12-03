@@ -13,14 +13,16 @@ class DatabaseMetricsService
     public function storeCommitFrequency($username, $repoName)
     {
         // Logic to store commit frequency data into the database
-        $data = Http::get("http://127.0.0.1:8000/api/metrics/$username/$repoName/commit-frequency")->json();
-        foreach($data as &$element){
+        $rootUrl = request()->root();
+        $rootUrlWithoutPort = preg_replace('/:\d+/', '', $rootUrl);
+        $data = Http::get("$rootUrlWithoutPort:8000/api/metrics/$username/$repoName/commit-frequency")->json();
+        foreach ($data as &$element) {
             $element['created_at'] = now();
             $element['updated_at'] = now();
         }
         $output = CommitFrequencyMetric::insert($data);
 
-        if($output == 1){
+        if ($output == 1) {
             return ['message' => 'stored successfully'];
         }
 
@@ -30,15 +32,17 @@ class DatabaseMetricsService
     public function storeCodeReviewInvolvement($username, $repoName)
     {
         // Logic to store code review involvement data into the database
-        $data = Http::get("http://127.0.0.1:8000/api/metrics/$username/$repoName/code-review-involvement")->json();
-        
-        foreach($data as &$element){
+        $rootUrl = request()->root();
+        $rootUrlWithoutPort = preg_replace('/:\d+/', '', $rootUrl);
+        $data = Http::get("$rootUrlWithoutPort:8000/api/metrics/$username/$repoName/code-review-involvement")->json();
+
+        foreach ($data as &$element) {
             $element['created_at'] = now();
             $element['updated_at'] = now();
         }
         $output = PrReviewMetrics::insert($data);
 
-        if($output == 1){
+        if ($output == 1) {
             return ['message' => 'stored successfully'];
         }
 
@@ -48,15 +52,17 @@ class DatabaseMetricsService
     public function storeIssueResolutionTime($username, $repoName)
     {
         // Logic to store issue resolution time data into the database
-        $data = Http::get("http://127.0.0.1:8000/api/metrics/$username/$repoName/issue-resolution-time")->json();
-        
-        foreach($data as &$element){
+        $rootUrl = request()->root();
+        $rootUrlWithoutPort = preg_replace('/:\d+/', '', $rootUrl);
+        $data = Http::get("$rootUrlWithoutPort:8000/api/metrics/$username/$repoName/issue-resolution-time")->json();
+
+        foreach ($data as &$element) {
             $element['created_at'] = now();
             $element['updated_at'] = now();
         }
         $output = IssueResolutionTime::insert($data);
 
-        if($output == 1){
+        if ($output == 1) {
             return ['message' => 'stored successfully'];
         }
 
@@ -66,15 +72,17 @@ class DatabaseMetricsService
     public function storeCodeChurn($username, $repoName)
     {
         // Logic to store code churn data into the database
-        $data = Http::get("http://127.0.0.1:8000/api/metrics/$username/$repoName/code-churn")->json();
-        
-        foreach($data as &$element){
+        $rootUrl = request()->root();
+        $rootUrlWithoutPort = preg_replace('/:\d+/', '', $rootUrl);
+        $data = Http::get("$rootUrlWithoutPort:8000/api/metrics/$username/$repoName/code-churn")->json();
+
+        foreach ($data as &$element) {
             $element['created_at'] = now();
             $element['updated_at'] = now();
         }
         $output = ChurnMetric::insert($data);
 
-        if($output == 1){
+        if ($output == 1) {
             return ['message' => 'stored successfully'];
         }
 
