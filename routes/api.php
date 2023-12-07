@@ -19,7 +19,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/store-metrics/{username}/{repoName}/commit-frequency', [MetricsStorageController::class, 'storeCommitFrequency']);
-Route::post('/store-metrics/{username}/{repoName}/code-review-involvement', [MetricsStorageController::class, 'storeCodeReviewInvolvement']);
-Route::post('/store-metrics/{username}/{repoName}/issue-resolution-time', [MetricsStorageController::class, 'storeIssueResolutionTime']);
-Route::post('/store-metrics/{username}/{repoName}/code-churn', [MetricsStorageController::class, 'storeCodeChurn']);
+Route::get('/store-metrics/{username}/{repoName}/commit-frequency', 
+[MetricsStorageController::class, 'storeCommitFrequency'])
+->name('store-commit-frequency');
+Route::get('/store-metrics/{username}/{repoName}/code-review-involvement', 
+[MetricsStorageController::class, 'storeCodeReviewInvolvement'])
+->name('store-code-review-involvement');
+Route::get('/store-metrics/{username}/{repoName}/issue-resolution-time', 
+[MetricsStorageController::class, 'storeIssueResolutionTime'])
+->name('store-issue-resolution-time');
+Route::get('/store-metrics/{username}/{repoName}/code-churn', 
+[MetricsStorageController::class, 'storeCodeChurn'])
+->name('store-code-churn');
+
+Route::get('/', [MetricsStorageController::class, 'index']);

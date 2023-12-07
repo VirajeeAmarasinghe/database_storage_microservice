@@ -14,6 +14,10 @@ class MetricsStorageController extends Controller
         $this->databaseMetricsService = $databaseMetricsService;
     }
 
+    public function index(){
+        return view('welcome');
+    }
+
     public function storeCommitFrequency($username, $repoName)
     {
         return $this->databaseMetricsService->storeCommitFrequency($username, $repoName);
