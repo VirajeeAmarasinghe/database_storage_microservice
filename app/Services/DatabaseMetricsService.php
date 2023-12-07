@@ -12,8 +12,10 @@ class DatabaseMetricsService
 {
     public function storeCommitFrequency($username, $repoName)
     {
-        // Logic to store commit frequency data into the database        
-        $data = Http::get("http://172.25.0.1:8000/api/metrics/$username/$repoName/commit-frequency")->json();
+        // Logic to store commit frequency data into the database  
+        $url = env('BASE_ROUTE');
+
+        $data = Http::get("$url/api/metrics/$username/$repoName/commit-frequency")->json();
         foreach ($data as &$element) {
             $element['created_at'] = now();
             $element['updated_at'] = now();
@@ -29,8 +31,9 @@ class DatabaseMetricsService
 
     public function storeCodeReviewInvolvement($username, $repoName)
     {
-        // Logic to store code review involvement data into the database        
-        $data = Http::get("http://172.25.0.1:8000/api/metrics/$username/$repoName/code-review-involvement")->json();
+        // Logic to store code review involvement data into the database 
+        $url = env('BASE_ROUTE');       
+        $data = Http::get("$url/api/metrics/$username/$repoName/code-review-involvement")->json();
 
         foreach ($data as &$element) {
             $element['created_at'] = now();
@@ -47,8 +50,9 @@ class DatabaseMetricsService
 
     public function storeIssueResolutionTime($username, $repoName)
     {
-        // Logic to store issue resolution time data into the database        
-        $data = Http::get("http://172.25.0.1:8000/api/metrics/$username/$repoName/issue-resolution-time")->json();
+        // Logic to store issue resolution time data into the database  
+        $url = env('BASE_ROUTE');      
+        $data = Http::get("$url/api/metrics/$username/$repoName/issue-resolution-time")->json();
         
         foreach ($data as &$element) {
             $element['created_at'] = now();
@@ -65,8 +69,9 @@ class DatabaseMetricsService
 
     public function storeCodeChurn($username, $repoName)
     {
-        // Logic to store code churn data into the database        
-        $data = Http::get("http://172.25.0.1:8000/api/metrics/$username/$repoName/code-churn")->json();
+        // Logic to store code churn data into the database  
+        $url = env('BASE_ROUTE');      
+        $data = Http::get("$url/api/metrics/$username/$repoName/code-churn")->json();
 
         foreach ($data as &$element) {
             $element['created_at'] = now();
