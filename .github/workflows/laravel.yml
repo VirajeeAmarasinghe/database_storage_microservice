@@ -1,0 +1,53 @@
+name: Laravel
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  database-storage-microservice-ci:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      with:
+        php-version: '8.0'
+    - uses: actions/checkout@v3
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist    
+    - name: clear cache
+      run: php artisan cache:clear
+    - name: clear config
+      run: php artisan config:clear
+    - name: clear event
+      run: php artisan event:clear
+    - name: clear optimize
+      run: php artisan optimize:clear
+    - name: cache route
+      run: php artisan route:cache
+    - name: clear view
+      run: php artisan view:clear
+    - name: clear config
+      run: php artisan config:clear 
+    - name: clear view
+      run: php artisan view:clear    
+    - name: Generate key
+      run: php artisan key:generate
+    - name: optimize
+      run: php artisan optimize
+    - name: Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+    - name: Create Database
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+      run: vendor/bin/phpunit
